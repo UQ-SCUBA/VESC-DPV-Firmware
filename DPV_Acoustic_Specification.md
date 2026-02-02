@@ -6,7 +6,7 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 ## Hardware Specifications
 
 ### VESC/Controller
-- **Model**: [Fill in your VESC/FOCBOX model]
+- **Model**: [FlipSky 75100 PRO]
 - **Firmware Version**: [1.0]
 - **Hardware Version**: [1.0]
 
@@ -22,8 +22,8 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 
 ### Motor
 - **Model**: [BFA-42-200]
-- **Max ERPM**: 6000 (as defined in code)( actual motor speed)
-- **Pole Pairs**: [8]
+- **Max ERPM**: 10,000 (as defined in code)(max motor rpm 6000)
+- **Pole Pairs**: [4]
 
 ### Environment
 - **Operating Environment**: Underwater (affects acoustic propagation)
@@ -109,6 +109,12 @@ Define beep patterns for different battery states:
 - **Beep Duration**: [Longer may be more audible underwater]
 - **Notes on Testing**: [Plan for underwater acoustic testing]
 
+   ## E-clutch
+
+  ### what it should do
+  - **  **
+   ### when it should do
+- **  **
 ## Implementation Requirements
 
 ### Code Integration Points
