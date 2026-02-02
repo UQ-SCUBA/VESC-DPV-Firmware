@@ -7,8 +7,8 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 
 ### VESC/Controller
 - **Model**: [Fill in your VESC/FOCBOX model]
-- **Firmware Version**: [Current version]
-- **Hardware Version**: [e.g., 4.12, 6.x]
+- **Firmware Version**: [1.0]
+- **Hardware Version**: [1.0]
 
 ### Battery Configuration
 - **Battery Type**: [e.g., Li-ion, LiPo]
@@ -21,14 +21,14 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
   - Cutoff: [e.g., 39.6V] volts
 
 ### Motor
-- **Model**: [Your motor model]
-- **Max ERPM**: 8000 (as defined in code)
-- **Pole Pairs**: [number]
+- **Model**: [BFA-42-200]
+- **Max ERPM**: 6000 (as defined in code)( actual motor speed)
+- **Pole Pairs**: [8]
 
 ### Environment
 - **Operating Environment**: Underwater (affects acoustic propagation)
-- **Typical Depth**: [meters]
-- **Water Type**: [Saltwater/Freshwater]
+- **Typical Depth**: [100]
+- **Water Type**: [Saltwater]
 
 ## Current Functionality (Existing Code)
 
