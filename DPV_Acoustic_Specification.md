@@ -7,6 +7,7 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 
 ### VESC/Controller
 - **Model**: [FlipSky 75100 PRO]
+- **Additional Hardware**: [AS5047P Encoder with on axis magnet]
 - **Firmware Version**: [1.0]
 - **Hardware Version**: [1.0]
 
