@@ -11,14 +11,14 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 - **Hardware Version**: [1.0]
 
 ### Battery Configuration
-- **Battery Type**: [e.g., Li-ion, LiPo]
-- **Nominal Voltage**: [e.g., 44.4V for 12S]
-- **Cell Configuration**: [e.g., 12S4P]
+- **Battery Type**: [Li-ion]
+- **Nominal Voltage**: [54.6]
+- **Cell Configuration**: [13s]
 - **Voltage Range**:
-  - Fully Charged: [e.g., 50.4V] volts
-  - Nominal: [e.g., 44.4V] volts
-  - Low Warning: [e.g., 42.0V] volts
-  - Cutoff: [e.g., 39.6V] volts
+  - Fully Charged: [54.6V] volts
+  - Nominal: [48.1] volts
+  - Low Warning: [44.0V] volts
+  - Cutoff: [40.0v] volts
 
 ### Motor
 - **Model**: [BFA-42-200]
@@ -28,7 +28,7 @@ Adding FOC tone-based acoustic battery status feedback to custom VESC firmware f
 ### Environment
 - **Operating Environment**: Underwater (affects acoustic propagation)
 - **Typical Depth**: [100]
-- **Water Type**: [Saltwater]
+- **Water Type**: [Saltwater and salt]
 
 ## Current Functionality (Existing Code)
 
@@ -51,58 +51,21 @@ Current speed array: 10%, 15%, 25%, 35%, 40%, 55%, 75%, 85%, 100% of MAX_ERPM
 ### Acoustic Feedback Scenarios
 
 #### 1. Startup/Power-On Beep
-- **When**: Motor first starts (speedSetting changes from 0 to active)
-- **Pattern**: [Describe desired pattern, e.g., "3 quick beeps at 2kHz"]
+- **When**: [When the battery is connected]
+- **Pattern**: [25% battery or less one beep long, 25% to 50% two beeps short, 51% to 75% 3 beeps short, 76% to 100% 4 beeps 0.5 short, long beep 3 seconds, short beeps 0.5 seconds with 0.5 second between them]
 - **Purpose**: Confirm system is active and provide immediate battery status
 
 #### 2. Periodic Battery Status
-- **When**: [e.g., Every 60 seconds during operation, or on speed changes]
-- **Frequency**: [How often?]
-- **Pattern**: [Describe]
+- **When**: [after motor has run for 20 seconds or longer and then the trigger is released to stop the motor or when the battery state changes from one threshold to another]
+- **Pattern**: [25% battery or less one beep long, 25% to 50% two beeps short, 51% to 75% 3 beeps short, 76% to 100% 4 beeps 0.5 short, long beep 3 seconds, short beeps 0.5 seconds with 0.5 second between them]
 
-#### 3. Battery Level Indicators
-Define beep patterns for different battery states:
 
-**Full Battery (>90% / >XX.X volts)**
-- Beeps: [e.g., 3 beeps]
-- Frequency: [e.g., 2000 Hz]
-- Duration: [e.g., 150ms each]
-- Spacing: [e.g., 100ms between beeps]
-
-**Good Battery (70-90% / XX.X - XX.X volts)**
-- Beeps: [e.g., 2 beeps]
-- Frequency: [e.g., 2000 Hz]
-- Duration: [e.g., 150ms each]
-- Spacing: [e.g., 100ms between beeps]
-
-**Medium Battery (40-70% / XX.X - XX.X volts)**
-- Beeps: [e.g., 2 beeps, lower tone]
-- Frequency: [e.g., 1500 Hz]
-- Duration: [e.g., 150ms each]
-- Spacing: [e.g., 100ms between beeps]
-
-**Low Battery (20-40% / XX.X - XX.X volts)**
-- Beeps: [e.g., 1 long beep]
-- Frequency: [e.g., 1000 Hz]
-- Duration: [e.g., 300ms]
-- Spacing: N/A
-
-**Critical Battery (<20% / <XX.X volts)**
-- Beeps: [e.g., Rapid pulsing pattern]
-- Frequency: [e.g., 800 Hz]
-- Duration: [e.g., 100ms pulses]
-- Pattern: [e.g., 5 rapid beeps]
-
-#### 4. Warning Conditions
-- **Low Battery Warning**: [When voltage drops below threshold]
-- **Critical Battery**: [Approaching cutoff voltage]
-- **Pattern**: [More urgent/distinctive pattern]
 
 ### Acoustic Considerations for Underwater Use
 
 #### Frequency Selection
-- **Preferred Frequency Range**: [e.g., 1000-3000 Hz]
-- **Reasoning**: [e.g., "Better propagation underwater" or "Testing required"]
+- **Preferred Frequency Range**: [3000hz]
+- **Reasoning**: ["Testing required"]
 - **Notes**: Water attenuates high frequencies more than air
 
 #### Volume/Intensity
@@ -110,11 +73,11 @@ Define beep patterns for different battery states:
 - **Notes on Testing**: [Plan for underwater acoustic testing]
 
    ## E-clutch
-
-  ### what it should do
-  - **  **
-   ### when it should do
-- **  **
+### Primary Requirement
+- **to protect the motor from stall conditions** 
+  **what it should do it**:[put the motor into a low power & rpm mode]
+   **when it should do it**: [when the controller has a high current draw and near zero rpm or if it senses very low load for the RPM ie out of the water]
+-**Reasons** to protect the motor from over heat and allow the user to stop a runaway trigger out of water it will protect the mechanical seal from damage
 ## Implementation Requirements
 
 ### Code Integration Points
